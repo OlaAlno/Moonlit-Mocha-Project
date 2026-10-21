@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonlit Mocha | A Coffee Lover's Haven</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+<header>
+    <h1>Moonlit Mocha</h1>
+    <p class="tagline">Where every sip tells a story under the moonlight.</p>
+    <a href="OurMenu.html" class="cta-button">Explore Our Menu</a> 
+</header>
+
+    <nav>
+        <ul>
+            <li><a href="HomePage.html">Home</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="OurMenu.html">Our Menu</a></li>
+            <li><a href="ContactandLocation.html">Contact & Location</a></li>
+            <li><a href="OrderOnline.html">Order Online</a></li>
+        </ul>
+    </nav>
+
+    <!-- Carousel Section -->
+    <section class="carousel-box-container">
+        <div class="carousel-box">
+            <img src="Dreamy Donut.jpg" alt=" Image 1">
+            <img src="Starlight Latte.jpg" alt="Coffee Image 2">
+            <img src="Zenith Zucchini Noodles.jpg" alt="Coffee Image 3">
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2>Welcome to Moonlit Mocha</h2>
+        <p>Step into the warmth of Moonlit Mocha, where the aroma of freshly brewed coffee fills the air. Our cozy café offers handcrafted coffee, artisanal pastries, and a serene ambiance perfect for unwinding or sparking creativity. Whether it's a morning espresso or a late-night latte, every cup is brewed with passion and care.</p>
+    </section>
+
+    <section class="image-gallery">
+        <img src="Cosmic Caprese Sandwhich.jpg" alt="A cup of freshly brewed coffee with latte art">
+        <img src="Ethereal Espresso.jpg" alt="Latte Art">
+        <img src="Starlight Scone.jpg" alt="Coffee Beans">
+    </section>
+
+    <section class="business-info" id="about">
+        <h2>About Moonlit Mocha</h2>
+        <p>Founded in 2025, Moonlit Mocha is more than just a café—it's a sanctuary for coffee enthusiasts. Nestled in the heart of our community, our café is designed to offer a perfect escape from the hustle and bustle, where you can relax with friends, spark creativity, or just savor a moment of peace with your favorite brew. We're committed to sustainability, sourcing our beans ethically from the finest coffee-growing regions around the globe.</p>
+    </section>
+
+    <section class="customer-reviews">
+        <h2>What Our Customers Are Saying</h2>
+        <div class="review-grid">
+            <div class="review-box">
+                <p>“The coffee here is absolutely divine! I’ve never tasted anything quite like their Moonlit Latte—rich, creamy, and perfectly balanced. The cozy ambiance is just the cherry on top.”</p>
+                <p class="reviewer">- Emily R.</p>
+            </div>
+            <div class="review-box">
+                <p>“Moonlit Mocha is my go-to spot for unwinding after work. Their attention to detail, from the beautifully crafted drinks to the friendly service, is unmatched!”</p>
+                <p class="reviewer">- James P.</p>
+            </div>
+            <div class="review-box">
+                <p>“I love that they focus on ethically sourced beans. Not only do I get an amazing coffee experience, but I also feel good supporting their mission.”</p>
+                <p class="reviewer">- Sarah L.</p>
+            </div>
+            <div class="review-box">
+                <p>“Absolutely love this place! The staff is friendly, the coffee is next-level, and the pastries are to die for. Highly recommend!”</p>
+                <p class="reviewer">- Michael T.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup Section -->
+    <section class="newsletter">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for the latest news, offers, and events.</p>
+        <form id="newsletter-form" action="#" method="post">
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    <div id="confirmation-message" class="confirmation-message">
+        Thank you for subscribing! 🎉
+    </div>
+</section>
+
+    <footer>
+        <p>&copy; 2025 Moonlit Mocha | Crafted with love & coffee</p>
+    </footer>
+
+    
+    <script>
+        let currentIndex = 0;
+
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.carousel-box img');
+            const totalSlides = slides.length;
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = totalSlides - 1;
+            } else if (currentIndex >= totalSlides) {
+                currentIndex = 0;
+            }
+
+            const newTransformValue = -currentIndex * 100 + '%';
+            document.querySelector('.carousel-box').style.transform = `translateX(${newTransformValue})`;
+        }
+    </script>
+
+<script>
+    // JavaScript to handle form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Get the email input value
+        const email = document.getElementById('email').value;
+
+        const emailInput = document.getElementById('email');
+        if (!emailInput.value.includes('@')) { 
+             alert('Please enter a valid email address.');
+             return;
+}
+
+        // Simulate a successful submission (you can replace this with an actual API call)
+        console.log(`Subscribed with email: ${email}`);
+
+        // Show the confirmation message
+        const confirmationMessage = document.getElementById('confirmation-message');
+        confirmationMessage.style.display = 'block';
+
+        // Clear the form
+        document.getElementById('newsletter-form').reset();
+
+        // Hide the message after 5 seconds
+        setTimeout(() => {
+            confirmationMessage.style.display = 'none';
+        }, 5000);
+    });
+</script>
+</body>
+</html>
+
+
+
+
+

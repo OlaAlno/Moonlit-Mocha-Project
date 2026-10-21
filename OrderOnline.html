@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online | Moonlit Mocha</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>Order Online</h1>
+        <p class="tagline">Cosmic Cravings Delivered</p>
+        <a href="#order-form" class="cta-button">Start Order</a>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="HomePage.html">Home</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="OurMenu.html">Our Menu</a></li>
+            <li><a href="ContactandLocation.html">Contact & Location</a></li>
+            <li><a href="OrderOnline.html">Order Online</a></li>
+
+        </ul>
+    </nav>
+
+    <!-- In the Order Form Section -->
+<section class="business-info" id="order-form">
+    <h2>Place Your Order</h2>
+    <form id="order-form">
+        <div class="market-grid">
+            <div class="market-item">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="market-item">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+        </div>
+
+        <div class="market-grid">
+            <div class="market-item">
+                <h3>Drink Selection</h3>
+                <select id="drinks" required>
+                    <option value="" disabled selected>Please select a drink</option>
+                    <option value="ethereal-espresso">Ethereal Espresso - £3.50</option>
+                    <option value="mystic-mocha">Mystic Mocha - £4.00</option>
+                    <option value="starlight-latte">Starlight Latte - £3.75</option>
+                    <option value="aurora-tea">Aurora Tea - £2.50</option>
+                    <option value="starry-chai-latte">Starry Chai Latte - £3.75</option>
+                    <option value="galactic-matcha">Galactic Matcha - £4.25</option>
+                    <option value="celestial-cold-brew">Celestial Cold Brew - £3.50</option>
+                    <option value="meteorite-macchiato">Meteorite Macchiato - £3.95</option>
+                    <option value="lunar-lemonade">Lunar Lemonade - £3.25</option>
+                    <option value="galaxy-smoothie">Galaxy Smoothie - £4.50</option>
+                    <option value="infinity-iced-tea">Infinity Iced Tea - £3.25</option>
+                </select>
+            </div>
+            <div class="market-item">
+                <h3>Food Selection</h3>
+                <select id="food" required>
+                    <option value="" disabled selected>Please select a food item</option>
+                    <option value="enchanted-pastry">Enchanted Pastry - £2.50</option>
+                    <option value="dreamy-donut">Dreamy Donut - £2.75</option>
+                    <option value="starlight-scone">Starlight Scone - £2.75</option>
+                    <option value="nebula-brownie">Nebula Brownie - £3.25</option>
+                    <option value="cosmic-caprese-sandwich">Cosmic Caprese Sandwich - £5.50</option>
+                    <option value="solar-soup-of-the-day">Solar Soup of the Day - £4.00</option>
+                    <option value="milky-way-macaron">Milky Way Macaron - £2.25</option>
+                    <option value="astral-avocado-toast">Astral Avocado Toast - £4.75</option>
+                    <option value="zenith-zucchini-noodles">Zenith Zucchini Noodles - £6.50</option>
+                    <option value="supernova-salad">Supernova Salad - £5.75</option>
+                    <option value="comet-cookie">Comet Cookie - £2.50</option>
+                    <option value="venusian-veggie-wrap">Venusian Veggie Wrap - £5.25</option>
+                    <option value="galaxy-granola-parfait">Galaxy Granola Parfait - £4.25</option>
+                    <option value="mystical-mango-smoothie-bowl">Mystical Mango Smoothie Bowl - £5.75</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="total-display">
+            <h3>Order Total: <span id="order-total">£0.00</span></h3>
+        </div>
+
+        <button type="submit" class="cta-button">Complete Order</button>
+    </form>
+</section>
+
+<section class="newsletter">
+    <h2>Order Tracking</h2>
+    <form id="tracking-form">
+        <input type="text" id="order-number" placeholder="Order #" required>
+        <button type="submit" class="cta-button">Track</button>
+    </form>
+    <div id="tracking-result" class="confirmation-message" style="display: none;"></div>
+</section>
+
+<div id="confirmation-message" class="confirmation-message" style="display: none;">
+    <p>Thank you, <span id="customer-name-display"></span>! Your order (#<span id="order-number-display"></span>) has been placed. 🚀</p>
+    <p>Total: <span id="order-total-display"></span></p>
+</div>
+
+<footer>
+    <p>&copy; 2025 Moonlit Mocha | Crafted with love & coffee</p>
+</footer>
+
+<script>
+    // Price extraction function
+    function extractPrice(optionText) {
+        const priceMatch = optionText.match(/£(\d+\.\d{2})/);
+        return priceMatch ? parseFloat(priceMatch[1]) : 0;
+    }
+
+    // Calculate total
+    function calculateTotal() {
+        const drinkSelect = document.getElementById('drinks');
+        const foodSelect = document.getElementById('food');
+        
+        const drinkPrice = extractPrice(drinkSelect.options[drinkSelect.selectedIndex].text);
+        const foodPrice = extractPrice(foodSelect.options[foodSelect.selectedIndex].text);
+        
+        const total = drinkPrice + foodPrice;
+        document.getElementById('order-total').textContent = `£${total.toFixed(2)}`;
+    }
+
+    // Generate order number
+    function generateOrderNumber() {
+        return 'MOON-' + Date.now().toString().slice(-6);
+    }
+
+    // Order submission
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const drink = document.getElementById('drinks').value;
+        const food = document.getElementById('food').value;
+        const total = document.getElementById('order-total').textContent;
+
+        if (name && email && drink && food) {
+            const orderNumber = generateOrderNumber();
+            
+            // Store order in localStorage
+            const order = {
+                number: orderNumber,
+                name: name,
+                email: email,
+                drink: drink,
+                food: food,
+                total: total,
+                status: 'Preparing'
+            };
+            
+            localStorage.setItem(orderNumber, JSON.stringify(order));
+
+            // Show confirmation
+            document.getElementById('customer-name-display').textContent = name;
+            document.getElementById('order-number-display').textContent = orderNumber;
+            document.getElementById('order-total-display').textContent = total;
+            document.getElementById('confirmation-message').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            document.getElementById('order-total').textContent = '£0.00';
+
+            // Hide message after 10 seconds
+            setTimeout(() => {
+                document.getElementById('confirmation-message').style.display = 'none';
+            }, 10000);
+        }
+    });
+
+    // Tracking form
+    document.getElementById('tracking-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const orderNumber = document.getElementById('order-number').value;
+        const order = JSON.parse(localStorage.getItem(orderNumber));
+        
+        const trackingResult = document.getElementById('tracking-result');
+        if (order) {
+            trackingResult.innerHTML = `
+                <p>Order #${order.number}</p>
+                <p>Status: ${order.status}</p>
+                <p>Total: ${order.total}</p>
+            `;
+            trackingResult.style.backgroundColor = '#4CAF50';
+        } else {
+            trackingResult.textContent = 'Order not found. Please check your order number.';
+            trackingResult.style.backgroundColor = '#ff4444';
+        }
+        trackingResult.style.display = 'block';
+    });
+</script>
+</body>
+</html>
+
+
+<script>
+    // Price data
+    const prices = {
+            drinks: {
+                'ethereal-espresso': 3.50,
+                'mystic-mocha': 4.00,
+                'starlight-latte': 3.75,
+                'aurora-tea': 2.50,
+                'starry-chai-latte': 3.75,
+                'galactic-matcha': 4.25,
+                'celestial-cold-brew': 3.50,
+                'meteorite-macchiato': 3.95,
+                'lunar-lemonade': 3.25,
+                'galaxy-smoothie': 4.50,
+                'infinity-iced-tea': 3.25
+            },
+            food: {
+                'enchanted-pastry': 2.50,
+                'dreamy-donut': 2.75,
+                'starlight-scone': 2.75,
+                'nebula-brownie': 3.25,
+                'cosmic-caprese-sandwich': 5.50,
+                'solar-soup-of-the-day': 4.00,
+                'milky-way-macaron': 2.25,
+                'astral-avocado-toast': 4.75,
+                'zenith-zucchini-noodles': 6.50,
+                'supernova-salad': 5.75,
+                'comet-cookie': 2.50,
+                'venusian-veggie-wrap': 5.25,
+                'galaxy-granola-parfait': 4.25,
+                'mystical-mango-smoothie-bowl': 5.75
+            }
+        };
+
+        function calculateTotal() {
+            // Get selected values
+            const drink = document.getElementById('drinks').value;
+            const food = document.getElementById('food').value;
+            
+            // Calculate prices
+            const drinkPrice = drink ? prices.drinks[drink] : 0;
+            const foodPrice = food ? prices.food[food] : 0;
+            const total = drinkPrice + foodPrice;
+
+            // Update display
+            document.getElementById('order-total').textContent = `£${total.toFixed(2)}`;
+        }
+
+        // Add event listeners
+        document.getElementById('drinks').addEventListener('change', calculateTotal);
+        document.getElementById('food').addEventListener('change', calculateTotal);
+        
+        // Initial calculation
+        calculateTotal();
+
+        // Generate order number
+        function generateOrderNumber() {
+            return 'MOON-' + Date.now().toString().slice(-6);
+        }
+
+        // Simulate order progression
+        function simulateOrderProgression(orderNumber) {
+            const statuses = [
+                { status: 'Received', message: 'We have received your order and will start preparing it shortly.', progress: 0, time: 'Estimated time: 1 minute' },
+                { status: 'Preparing', message: 'Our baristas are crafting your cosmic delights!', progress: 33, time: 'Estimated time: 10-15 minutes' },
+                { status: 'Ready', message: 'Your order is ready for pickup/delivery!', progress: 66, time: 'Estimated time: 5 minutes' },
+                { status: 'Delivered', message: 'Your order has been delivered. Enjoy your cosmic experience!', progress: 100, time: 'Order complete' }
+            ];
+
+            let currentStatus = 0;
+            
+            // Update status immediately
+            updateOrderStatus(orderNumber, statuses[currentStatus]);
+            
+            // Set interval for status updates
+            const interval = setInterval(() => {
+                currentStatus++;
+                if (currentStatus < statuses.length) {
+                    updateOrderStatus(orderNumber, statuses[currentStatus]);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 10000); // Update every 10 seconds for demo (would be longer in real app)
+        }
+
+        function updateOrderStatus(orderNumber, status) {
+            const order = JSON.parse(localStorage.getItem(orderNumber));
+            if (order) {
+                order.status = status.status;
+                localStorage.setItem(orderNumber, JSON.stringify(order));
+            }
+        }
+
+        function displayOrderStatus(order) {
+            const trackingResult = document.getElementById('tracking-result');
+            const statusMessage = document.getElementById('status-message');
+            const estimatedTime = document.getElementById('estimated-time');
+            
+            // Reset all steps
+            document.querySelectorAll('.status-step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            
+            // Update progress based on status
+            let progress = 0;
+            let currentStep = 'step-received';
+            
+            switch(order.status) {
+                case 'Received':
+                    progress = 0;
+                    currentStep = 'step-received';
+                    statusMessage.textContent = 'We have received your order and will start preparing it shortly.';
+                    estimatedTime.textContent = 'Estimated time: 15-20 minutes';
+                    break;
+                case 'Preparing':
+                    progress = 33;
+                    currentStep = 'step-preparing';
+                    statusMessage.textContent = 'Our baristas are crafting your cosmic delights!';
+                    estimatedTime.textContent = 'Estimated time: 10-15 minutes';
+                    document.getElementById('step-received').classList.add('completed');
+                    break;
+                case 'Ready':
+                    progress = 66;
+                    currentStep = 'step-ready';
+                    statusMessage.textContent = 'Your order is ready for pickup/delivery!';
+                    estimatedTime.textContent = 'Estimated time: 5 minutes';
+                    document.getElementById('step-received').classList.add('completed');
+                    document.getElementById('step-preparing').classList.add('completed');
+                    break;
+                case 'Delivered':
+                    progress = 100;
+                    currentStep = 'step-delivered';
+                    statusMessage.textContent = 'Your order has been delivered. Enjoy your cosmic experience!';
+                    estimatedTime.textContent = 'Order complete';
+                    document.getElementById('step-received').classList.add('completed');
+                    document.getElementById('step-preparing').classList.add('completed');
+                    document.getElementById('step-ready').classList.add('completed');
+                    break;
+            }
+            
+            // Highlight current step
+            document.getElementById(currentStep).classList.add('active');
+            
+            // Update progress bar
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            
+            trackingResult.style.display = 'block';
+            trackingResult.style.backgroundColor = '#f8f8f8';
+        }
+
+        // Order submission
+        document.getElementById('order-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const drink = document.getElementById('drinks').value;
+            const food = document.getElementById('food').value;
+            const total = document.getElementById('order-total').textContent;
+
+            if (name && email && drink && food) {
+                const orderNumber = generateOrderNumber();
+                
+                // Store order in localStorage
+                const order = {
+                    number: orderNumber,
+                    name: name,
+                    email: email,
+                    drink: drink,
+                    food: food,
+                    total: total,
+                    status: 'Received',
+                    timestamp: new Date().getTime()
+                };
+                
+                localStorage.setItem(orderNumber, JSON.stringify(order));
+
+                // Show confirmation
+                document.getElementById('customer-name-display').textContent = name;
+                document.getElementById('order-number-display').textContent = orderNumber;
+                document.getElementById('order-total-display').textContent = total;
+                document.getElementById('confirmation-message').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                document.getElementById('order-total').textContent = '£0.00';
+
+                // Start order progression simulation
+                simulateOrderProgression(orderNumber);
+
+                // Hide message after 10 seconds
+                setTimeout(() => {
+                    document.getElementById('confirmation-message').style.display = 'none';
+                }, 10000);
+            }
+        });
+
+        // Tracking form
+        document.getElementById('tracking-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const orderNumber = document.getElementById('order-number').value;
+            const order = JSON.parse(localStorage.getItem(orderNumber));
+            
+            if (order) {
+                displayOrderStatus(order);
+            } else {
+                const trackingResult = document.getElementById('tracking-result');
+                trackingResult.textContent = 'Order not found. Please check your order number.';
+                trackingResult.style.backgroundColor = '#ff4444';
+                trackingResult.style.display = 'block';
+            }
+        });
+</script>

@@ -1,0 +1,233 @@
+
+/* Default/Universal properties */
+:root {
+
+    /* Colours */
+    --black: #2c1d16;
+    --dark-brown: #4b382a;
+    --medium-brown: #a0765a;
+    --light-brown: #c49a6c;
+    --very-light-brown: #f8f5f2;
+    --green: #6fcf14;
+    --red: #e00025;
+
+    --background-colour: #fff;
+    --text-colour: #2c1d16;
+    --secondary-colour: #d6dee6;
+    
+    /* Font sizes */
+    --h2-font-size: 3rem;
+    --p-font-size: 1.1rem;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background-colour);
+    color: var(--text-colour);
+    padding-bottom: 100px;
+}
+
+section {
+    padding: 2rem 7%;
+    padding-top: 75px;
+}
+
+.subheading {
+    text-align: center;
+}
+
+.subheading h2 {
+    font-size: var(--h2-font-size);
+    font-weight: 500;
+    color: var(--text-colour);
+    line-height: 1.1;
+}
+
+.subheading p {
+    font-size: var(--p-font-size);
+    color: var(--secondary-colour);
+    line-height: 30px;
+    padding-top: 20px;
+}
+
+.product-tags li {
+    color: var(--background-colour);
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px 11px;
+    border-radius: 4px;
+}
+
+.vegetarian-tag, .vegan-tag, .gluten-free-tag {
+    background-color: var(--green);
+}
+
+.sale-tag {
+    background-color: var(--red);
+}
+
+.seasonal-tag {
+    background-color: #ffaf03;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+
+
+/* Header */
+
+
+
+
+/* Categories */
+.category-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 2rem;
+    align-items: center;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.container-box {
+    background-color: var(--background-colour);
+    height: 275px;
+    border: 1px solid #f0eded;
+    padding: 50px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.container-image img{
+    height: 85px;
+    width: 85px;
+    padding: 15px;
+    background: var(--background-colour);
+    box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.container-box h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.container-box p {
+    font-size: 15px;
+    color: var(--secondary-colour);
+}
+
+.container-box:hover {
+    box-shadow: 5px 30px 56.1276px rgb(55 55 55 / 12%);
+    border: 1px solid transparent;
+    transform: translateY(-3px);
+}
+
+
+
+/* Products */
+.product-selection {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    grid-gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.product-card {
+    height: 480px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 4px 4px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px 8px 0 0;
+    transition: 0.3s ease;
+}
+
+.product-tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.product-details h3 {
+    margin: 20px auto 10px auto;
+    font-weight: 500;
+}
+
+.product-details p {
+    margin: 20px;
+    line-height: 21px;
+}
+
+.product-details h4 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.product-rating {
+    color: #ffbc36;
+    margin: 10px;
+}
+
+
+/* Media Queries */
+@media screen and (max-width: 900px) {
+    .product-selection {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 0.8fr));
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .product-selection {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+footer {
+    background-color: #4b382a;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 1000; /* Ensure footer stays on top */
+}
